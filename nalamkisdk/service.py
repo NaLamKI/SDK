@@ -18,7 +18,7 @@ class NaLamKIService:
         self.model = self.init_model()
         self.s3 = None
         self.action_path = prod_action_path
-        self.rmq = RabbitMQHelper(os.getenv('MQTT_HOST'), os.getenv('MQTT_PORT'), os.getenv('MQTT_USERNAME'), os.getenv('MQTT_Password'), os.getenv('MQTT_QUEUE'))
+        self.rmq = None
 
     def init_model(self):
         '''
@@ -93,6 +93,7 @@ class NaLamKIService:
 
 
     def run(self):
+        self.rmq = RabbitMQHelper(os.getenv('MQTT_HOST'), os.getenv('MQTT_PORT'), os.getenv('MQTT_USERNAME'), os.getenv('MQTT_Password'), os.getenv('MQTT_QUEUE'))
         while True:
             # try:
             print("Service Loop started")
