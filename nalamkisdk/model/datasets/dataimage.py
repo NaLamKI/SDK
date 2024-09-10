@@ -9,6 +9,6 @@ from .datafile import File
 from ..annotations.bbox import BoundingBox
 
 @dataclass
-class Image(File):
+class DataImage(File):
     bbox: List[BoundingBox] = None
     

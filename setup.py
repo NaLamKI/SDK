@@ -3,7 +3,7 @@ from setuptools import setup, find_packages
 
 def get_version():
     version = {}
-    version_file_path = os.path.join(os.path.dirname(__file__), 'nalamkisdk', '__version__.py')
+    version_file_path = os.path.join(os.path.dirname(__file__), 'nalamkisdk', '__init__.py')
     with open(version_file_path) as fp:
         exec(fp.read(), version)
     return version['__version__']
