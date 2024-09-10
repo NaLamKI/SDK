@@ -1,0 +1,152 @@
+{
+    "$schema": "https://json-schema.org/draft/2019-09/schema",
+    "type": "object",
+    "title": "Dashboard_Template",
+    "properties": {
+        "stylings": {
+            "type": "array",
+            "additionalItems": true,
+            "items": {
+                "type": "object",
+                "properties": {
+                    "featureType": {
+                        "type": "array",
+                        "additionalItems": true,
+                        "items": {
+                            "type": "string"
+                        }
+                    },
+                    "title": {
+                        "type": "string"
+                    },
+                    "description": {
+                        "type": "string"
+                    },
+                    "widgets": {
+                        "type": "array",
+                        "additionalItems": true,
+                        "anyOf": [
+                            {
+                                "type": "object",
+                                "properties": {
+                                    "Widget:Chart": {
+                                        "type": "object",
+                                        "properties": {
+                                            "type": {
+                                                "type": "string",
+                                                "enum": [
+                                                    "CHART",
+                                                    "IMAGE",
+                                                    "ALPHANUM"
+                                                ]
+                                            },
+                                            "chart_type": {
+                                                "type": "string",
+                                                "enum": [
+                                                    "BAR",
+                                                    "LINE",
+                                                    "PIE"
+                                                ]
+                                            },
+                                            "data": {
+                                                "type": "string"
+                                            },
+                                            "values": {
+                                                "type": "array",
+                                                "additionalItems": true,
+                                                "items": {
+                                                    "type": "string"
+                                                }
+                                            },
+                                            "click_datapoint": {
+                                                "type": "boolean"
+                                            },
+                                            "datapoint_widgets": {
+                                                "type": "array",
+                                                "additionalItems": true,
+                                                "anyOf": [
+                                                    {
+                                                        "type": "object",
+                                                        "additionalProperties": true
+                                                    },
+                                                    {
+                                                        "type": "object",
+                                                        "additionalProperties": true
+                                                    }
+                                                ]
+                                            }
+                                        },
+                                        "additionalProperties": true
+                                    }
+                                },
+                                "additionalProperties": true
+                            },
+                            {
+                                "type": "object",
+                                "properties": {
+                                    "Widget:Alphanum": {
+                                        "type": "object",
+                                        "properties": {
+                                            "type": {
+                                                "type": "string",
+                                                "enum": [
+                                                    "CHART",
+                                                    "IMAGE",
+                                                    "ALPHANUM"
+                                                ]
+                                            },
+                                            "data": {
+                                                "type": "string"
+                                            },
+                                            "items": {
+                                                "type": "array",
+                                                "additionalItems": true,
+                                                "items": {
+                                                    "type": "object",
+                                                    "properties": {
+                                                        "label": {
+                                                            "type": "string"
+                                                        },
+                                                        "value": {
+                                                            "type": "string"
+                                                        },
+                                                        "unit": {
+                                                            "type": "string"
+                                                        }
+                                                    },
+                                                    "additionalProperties": false
+                                                }
+                                            }
+                                        },
+                                        "additionalProperties": true
+                                    }
+                                },
+                                "additionalProperties": true
+                            },
+                            {
+                                "type": "object",
+                                "properties": {
+                                    "Widget:Images": {
+                                        "type": "object",
+                                        "properties": {
+                                            "data": {
+                                                "type": "string"
+                                            },
+                                            "bounding_boxes": {
+                                                "type": "boolean"
+                                            }
+                                        },
+                                        "additionalProperties": false
+                                    }
+                                },
+                                "additionalProperties": true
+                            }
+                        ]
+                    }
+                },
+                "additionalProperties": true
+            }
+        }
+    },
+    "additionalProperties": true
+}

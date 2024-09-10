@@ -1,0 +1,154 @@
+{
+    "$schema": "https://json-schema.org/draft/2019-09/schema",
+    "type": "object",
+    "title": "Catalog_Entry",
+    "properties": {
+        "id": {
+            "type": "string",
+            "format": "uuid"
+        },
+        "name": {
+            "type": "string"
+        },
+        "claim": {
+            "type": "string"
+        },
+        "description": {
+            "type": "string"
+        },
+        "organisation": {
+            "type": "object",
+            "properties": {
+                "name": {
+                    "type": "string"
+                },
+                "website_url": {
+                    "type": "string"
+                },
+                "adress": {
+                    "type": "object",
+                    "properties": {
+                        "street": {
+                            "type": "string"
+                        },
+                        "zip_code": {
+                            "type": "string"
+                        },
+                        "city": {
+                            "type": "string"
+                        },
+                        "country": {
+                            "type": "string"
+                        }
+                    },
+                    "additionalProperties": false
+                },
+                "logo_url": {
+                    "type": "string"
+                },
+                "description": {
+                    "type": "string"
+                }
+            },
+            "additionalProperties": false
+        },
+        "contact": {
+            "type": "array",
+            "additionalItems": true,
+            "items": {
+                "type": "object",
+                "properties": {
+                    "type": {
+                        "type": "string",
+                        "enum": [
+                            "mail",
+                            "phon",
+                            "website"
+                        ]
+                    },
+                    "value": {
+                        "type": "string"
+                    }
+                },
+                "additionalProperties": false
+            }
+        },
+        "image_gallery": {
+            "type": "array",
+            "additionalItems": true,
+            "items": {
+                "type": "object",
+                "properties": {
+                    "url": {
+                        "type": "string"
+                    },
+                    "name": {
+                        "type": "string"
+                    },
+                    "description": {
+                        "type": "string"
+                    }
+                },
+                "additionalProperties": false
+            }
+        },
+        "downloads": {
+            "type": "array",
+            "additionalItems": true,
+            "items": {
+                "type": "object",
+                "properties": {
+                    "url": {
+                        "type": "string"
+                    },
+                    "name": {
+                        "type": "string"
+                    },
+                    "description": {
+                        "type": "string"
+                    }
+                },
+                "additionalProperties": false
+            }
+        },
+        "tags": {
+            "type": "array",
+            "additionalItems": true,
+            "items": {
+                "type": "string"
+            }
+        },
+        "features": {
+            "type": "array",
+            "additionalItems": true,
+            "items": {
+                "type": "string"
+            }
+        },
+        "filter": {
+            "type": "object",
+            "properties": {
+                "cultivation_systems": {
+                    "type": "array",
+                    "additionalItems": true,
+                    "items": {
+                        "type": "string"
+                    }
+                },
+                "crops": {
+                    "type": "string",
+                    "description": "Agro Voc Nummer"
+                },
+                "process": {
+                    "type": "array",
+                    "additionalItems": true,
+                    "items": {
+                        "type": "string"
+                    }
+                }
+            },
+            "additionalProperties": false
+        }
+    },
+    "additionalProperties": false
+}

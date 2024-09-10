@@ -1,0 +1,376 @@
+{
+    "$schema": "https://json-schema.org/draft/2019-09/schema",
+    "title": "NaLamKI - AI Service Standards",
+    "type": "object",
+    "properties": {
+        "adress": {
+            "type": "object",
+            "properties": {
+                "street": {
+                    "type": "string"
+                },
+                "zip_code": {
+                    "type": "string"
+                },
+                "city": {
+                    "type": "string"
+                },
+                "country": {
+                    "type": "string"
+                }
+            },
+            "additionalProperties": false
+        },
+        "organisation": {
+            "type": "object",
+            "properties": {
+                "name": {
+                    "type": "string"
+                },
+                "website_url": {
+                    "type": "string"
+                },
+                "adress": {
+                    "type": "object",
+                    "properties": {
+                        "street": {
+                            "type": "string"
+                        },
+                        "zip_code": {
+                            "type": "string"
+                        },
+                        "city": {
+                            "type": "string"
+                        },
+                        "country": {
+                            "type": "string"
+                        }
+                    },
+                    "additionalProperties": false
+                },
+                "logo_url": {
+                    "type": "string"
+                },
+                "description": {
+                    "type": "string"
+                }
+            },
+            "additionalProperties": false
+        },
+        "contact": {
+            "type": "array",
+            "additionalItems": true,
+            "items": {
+                "type": "object",
+                "properties": {
+                    "type": {
+                        "type": "string",
+                        "enum": [
+                            "mail",
+                            "phon",
+                            "website"
+                        ]
+                    },
+                    "value": {
+                        "type": "string"
+                    }
+                },
+                "additionalProperties": false
+            }
+        },
+        "source": {
+            "type": "object",
+            "properties": {
+                "url": {
+                    "type": "string"
+                },
+                "name": {
+                    "type": "string"
+                },
+                "description": {
+                    "type": "string"
+                }
+            },
+            "additionalProperties": false
+        },
+        "Contact Item": {
+            "type": "object",
+            "properties": {
+                "type": {
+                    "type": "string",
+                    "enum": [
+                        "mail",
+                        "phon",
+                        "website"
+                    ]
+                },
+                "value": {
+                    "type": "string"
+                }
+            },
+            "additionalProperties": false
+        },
+        "Chart": {
+            "type": "object",
+            "properties": {
+                "type": {
+                    "type": "string"
+                },
+                "New Field": {
+                    "type": "string"
+                }
+            },
+            "additionalProperties": true
+        },
+        "Chart(1)": {
+            "type": "object",
+            "properties": {
+                "type": {
+                    "type": "string",
+                    "enum": [
+                        "CHART",
+                        "IMAGE",
+                        "ALPHANUM"
+                    ]
+                },
+                "chart_type": {
+                    "type": "string",
+                    "enum": [
+                        "BAR",
+                        "LINE",
+                        "PIE"
+                    ]
+                },
+                "data": {
+                    "type": "string"
+                },
+                "values": {
+                    "type": "array",
+                    "additionalItems": true,
+                    "items": {
+                        "type": "string"
+                    }
+                },
+                "click_datapoint": {
+                    "type": "boolean"
+                },
+                "widgets": {
+                    "type": "array",
+                    "additionalItems": true,
+                    "anyOf": [
+                        {
+                            "type": "object",
+                            "additionalProperties": true
+                        },
+                        {
+                            "type": "object",
+                            "additionalProperties": true
+                        }
+                    ]
+                }
+            },
+            "additionalProperties": true
+        },
+        "Widget:Chart": {
+            "type": "object",
+            "properties": {
+                "type": {
+                    "type": "string",
+                    "enum": [
+                        "CHART",
+                        "IMAGE",
+                        "ALPHANUM"
+                    ]
+                },
+                "chart_type": {
+                    "type": "string",
+                    "enum": [
+                        "BAR",
+                        "LINE",
+                        "PIE"
+                    ]
+                },
+                "data": {
+                    "type": "string"
+                },
+                "values": {
+                    "type": "array",
+                    "additionalItems": true,
+                    "items": {
+                        "type": "string"
+                    }
+                },
+                "click_datapoint": {
+                    "type": "boolean"
+                },
+                "datapoint_widgets": {
+                    "type": "array",
+                    "additionalItems": true,
+                    "anyOf": [
+                        {
+                            "type": "object",
+                            "additionalProperties": true
+                        },
+                        {
+                            "type": "object",
+                            "additionalProperties": true
+                        }
+                    ]
+                }
+            },
+            "additionalProperties": true
+        },
+        "New Field": {
+            "type": "object",
+            "properties": {
+                "Widget:Alphanum": {
+                    "type": "object",
+                    "properties": {
+                        "type": {
+                            "type": "string",
+                            "enum": [
+                                "CHART",
+                                "IMAGE",
+                                "ALPHANUM"
+                            ]
+                        },
+                        "data": {
+                            "type": "string"
+                        },
+                        "values": {
+                            "type": "array",
+                            "additionalItems": true,
+                            "items": {
+                                "type": "string"
+                            }
+                        }
+                    },
+                    "additionalProperties": true
+                }
+            },
+            "additionalProperties": true
+        },
+        "Widget:Alphanum": {
+            "type": "object",
+            "properties": {
+                "type": {
+                    "type": "string",
+                    "enum": [
+                        "CHART",
+                        "IMAGE",
+                        "ALPHANUM"
+                    ]
+                },
+                "data": {
+                    "type": "string"
+                },
+                "items": {
+                    "type": "array",
+                    "additionalItems": true,
+                    "items": {
+                        "type": "object",
+                        "properties": {
+                            "label": {
+                                "type": "string"
+                            },
+                            "value": {
+                                "type": "string"
+                            },
+                            "unit": {
+                                "type": "string"
+                            }
+                        },
+                        "additionalProperties": false
+                    }
+                }
+            },
+            "additionalProperties": true
+        },
+        "Widget:Images": {
+            "type": "object",
+            "properties": {
+                "data": {
+                    "type": "string"
+                },
+                "bounding_boxes": {
+                    "type": "boolean"
+                }
+            },
+            "additionalProperties": false
+        },
+        "TIME SERIES": {
+            "type": "object",
+            "properties": {
+                "id": {
+                    "type": "string"
+                },
+                "type": {
+                    "type": "string"
+                },
+                "items": {
+                    "type": "array",
+                    "additionalItems": true,
+                    "items": {
+                        "type": "object",
+                        "properties": {
+                            "timestamp": {
+                                "type": "string",
+                                "format": "date-time"
+                            },
+                            "values": {
+                                "type": "array",
+                                "additionalItems": true,
+                                "items": {
+                                    "type": "object",
+                                    "properties": {
+                                        "type": {
+                                            "type": "string"
+                                        },
+                                        "name": {
+                                            "type": "string"
+                                        },
+                                        "value": {
+                                            "type": "string"
+                                        },
+                                        "unit": {
+                                            "type": "string"
+                                        }
+                                    },
+                                    "additionalProperties": false
+                                }
+                            },
+                            "images": {
+                                "type": "array",
+                                "additionalItems": true,
+                                "items": {
+                                    "type": "object",
+                                    "properties": {
+                                        "name": {
+                                            "type": "string"
+                                        },
+                                        "image": {
+                                            "type": "string"
+                                        },
+                                        "url": {
+                                            "type": "string"
+                                        },
+                                        "bounding_boxes": {
+                                            "type": "array",
+                                            "additionalItems": true,
+                                            "items": {
+                                                "type": "string"
+                                            }
+                                        }
+                                    },
+                                    "additionalProperties": false
+                                }
+                            }
+                        },
+                        "additionalProperties": false
+                    }
+                }
+            },
+            "additionalProperties": false
+        }
+    }
+}
