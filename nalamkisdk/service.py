@@ -37,13 +37,13 @@ class NaLamKIService:
             input_files.append(open(os.path.join(path, file), 'rb'))
         return input_files
     
-    def save_data(self, files):
+    def save_data(self, files, mode="w"):
         '''
         Helper: Save list of files in output directory. 
         '''
         path = os.path.join(self.action_path, "output")
         for file in files:
-            with open(os.path.join(path, os.path.basename(file.name)), 'w') as f:
+            with open(os.path.join(path, os.path.basename(file.name)), mode) as f:
                 f.write(file.read())
 
     def process_data(self):
