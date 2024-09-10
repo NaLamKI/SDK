@@ -18,7 +18,7 @@ class NaLamKIService:
         self.model = self.init_model()
         self.s3 = None
         self.action_path = prod_action_path
-        self.rmq = RabbitMQHelper(os.getenv('MQTT_HOST'), os.getenv('MQTT_PORT'), os.getenv('MQTT_USERNAME'), os.getenv('MQTT_Password'), os.getenv('MQTT_QUEUE'))
+        self.rmq = None
 
     def init_model(self):
         '''
@@ -37,13 +37,13 @@ class NaLamKIService:
             input_files.append(open(os.path.join(path, file), 'rb'))
         return input_files
     
-    def save_data(self, files):
+    def save_data(self, files, mode="w"):
         '''
         Helper: Save list of files in output directory. 
         '''
         path = os.path.join(self.action_path, "output")
         for file in files:
-            with open(os.path.join(path, os.path.basename(file.name)), 'w') as f:
+            with open(os.path.join(path, os.path.basename(file.name)), mode) as f:
                 f.write(file.read())
 
     def process_data(self):
@@ -93,6 +93,7 @@ class NaLamKIService:
 
 
     def run(self):
+        self.rmq = RabbitMQHelper(os.getenv('MQTT_HOST'), os.getenv('MQTT_PORT'), os.getenv('MQTT_USERNAME'), os.getenv('MQTT_Password'), os.getenv('MQTT_QUEUE'))
         while True:
             # try:
             print("Service Loop started")
