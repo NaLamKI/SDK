@@ -6,7 +6,7 @@ from typing import List
 
 from .geojson import GeoFeature, GeoGeometry, GeoCoordinates, GeoFeatureProperty
 
-from .datasets import Dataset, Timeseries, TimeSeriesItem, DataValue, File, Image
+from .datasets import Dataset, Timeseries, TimeSeriesItem, DataValue, File, DataImage
 
 @dataclass
 class OutputData: 
