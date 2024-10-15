@@ -1,15 +1,15 @@
 from dataclasses import dataclass
 import uuid
-from .geometry import GeoGeometry
+from .geometry import GeoGeometry, GeoPoint, GeoPolygon
 from .property import GeoFeatureProperty
 from typing import List
 
 @dataclass
 class GeoFeature:
-    type:str
     geometry: GeoGeometry
     id: uuid = None
-    property: GeoFeatureProperty = None
+    properties: GeoFeatureProperty = None
+    type: str = "Feature"
 
     def __post_init__(self):
         self.id = uuid.uuid4()

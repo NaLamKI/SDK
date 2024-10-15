@@ -3,8 +3,8 @@ import uuid
 
 @dataclass
 class GeoCoordinates:
-    latitude:float
+    latitude: float
     longitude: float
 
     def tojson(self):
-        return [self.latitude, self.longitude]
+        return [self.longitude, self.latitude]

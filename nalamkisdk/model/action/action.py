@@ -10,7 +10,7 @@ from .action_data import ActionData
 
 @dataclass
 class Action():
-    pattern:str
+    pattern: str
     data: ActionData
 
     @classmethod

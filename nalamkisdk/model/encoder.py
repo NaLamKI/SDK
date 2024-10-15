@@ -2,7 +2,7 @@ import json
 from datetime import datetime
 from uuid import UUID
 
-from .geojson.geometry import GeoCoordinates
+from .geojson.geometry import GeoCoordinates, GeoPolygon, GeoPoint
 
 class NaLamKIDataEncoder(json.JSONEncoder):
     def default(self, obj):

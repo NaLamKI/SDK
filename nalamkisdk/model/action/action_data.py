@@ -8,7 +8,7 @@ from .s3bucket import S3Bucket
 
 @dataclass
 class ActionData():
-    bucket:S3Bucket
+    bucket: S3Bucket
     inputData: [str]
     outputData: str
 
