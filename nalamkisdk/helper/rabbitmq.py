@@ -20,8 +20,9 @@ class RabbitMQHelper:
         credentials = pika.PlainCredentials(username, password)
 
         self.connection = pika.BlockingConnection(pika.ConnectionParameters(host=endpoint, 
-                                                               port=port, 
-                                                               credentials=credentials
+                                                                            port=port, 
+                                                                            credentials=credentials,
+                                                                            heartbeat=600
                                                                ))
         self.channel = self.connection.channel()
         # Declare the queue (if it doesn't already exist)
