@@ -36,7 +36,41 @@ class NaLamKIService:
         for file in os.listdir(path):
             input_files.append(open(os.path.join(path, file), 'rb'))
         return input_files
-    
+
+    def save_blueprint(self):
+        '''
+        Helper: Save the Dashboard Blueprint file in output directory.
+        '''
+        path = os.path.join(self.action_path, "output")
+        if "dashboard_blueprint.json" in os.listdir("config"):
+            shutil.copy(os.path.join("config", "dashboard_blueprint.json"), os.path.join(path, "dashboard_blueprint.json"))
+        elif "dashboard_template.json" in os.listdir("config"):
+            shutil.copy(os.path.join("config", "dashboard_template.json"), os.path.join(path, "dashboard_blueprint.json"))
+        else:
+            print("ERROR: No Dashboard Blueprint found")
+
+    def json_to_string(self, json_data):
+        '''
+        Helper: Convert result JSON to properly formatted string. 
+        '''
+        return json.dumps(dataclasses.asdict(json_data), cls=NaLamKIDataEncoder, indent=2)
+
+    def save_result(self, data):
+        '''
+        Helper: Save output data as results.json in the output directory. 
+        '''
+        path = os.path.join(self.action_path, "output")
+        if type(data) == dict:
+            with open(os.path.join(path, "results.json"), "w") as f:
+                f.write(self.json_to_string(data))
+        elif type(data) == str:
+            with open(os.path.join(path, "results.json"), "w") as f:
+                f.write(data)
+        else:
+            print("ERROR: Data is not a valid type (dict or str)")
+        if "dashboard_blueprint.json" not in os.listdir(path):
+            self.save_blueprint()
+
     def save_data(self, files, mode="w"):
         '''
         Helper: Save list of files in output directory. 
@@ -45,6 +79,8 @@ class NaLamKIService:
         for file in files:
             with open(os.path.join(path, os.path.basename(file.name)), mode) as f:
                 f.write(file.read())
+        if "dashboard_blueprint.json" not in os.listdir(path):
+            self.save_blueprint()
 
     def process_data(self):
         pass
@@ -62,7 +98,7 @@ class NaLamKIService:
             print("ERROR: MQTT Message cannot be executed")
             print(error)
             traceback.print_exc() 
-            print(body)
+            oprint(body)
             self.rmq.write_message(json.dumps(dataclasses.asdict(Action(pattern="ERROR", data=None)), cls=NaLamKIDataEncoder))
             ch.basic_ack(delivery_tag=method.delivery_tag)
 
