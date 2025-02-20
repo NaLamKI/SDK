@@ -98,7 +98,7 @@ class NaLamKIService:
             print("ERROR: MQTT Message cannot be executed")
             print(error)
             traceback.print_exc() 
-            oprint(body)
+            print(body)
             self.rmq.write_message(json.dumps(dataclasses.asdict(Action(pattern="ERROR", data=None)), cls=NaLamKIDataEncoder))
             ch.basic_ack(delivery_tag=method.delivery_tag)
 
