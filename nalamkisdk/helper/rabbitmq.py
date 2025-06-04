@@ -1,5 +1,6 @@
 import pika
 import pika.credentials
+import ssl
 
 class RabbitMQHelper:
 
