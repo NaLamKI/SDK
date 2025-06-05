@@ -21,8 +21,6 @@ class RabbitMQHelper:
         credentials = pika.PlainCredentials(username, password)
 
         context = ssl.create_default_context()
-        context.check_hostname = False
-        context.verify_mode = ssl.CERT_NONE
         ssl_options = pika.SSLOptions(context, server_hostname=endpoint)
         
         self.connection = pika.BlockingConnection(pika.ConnectionParameters(host=endpoint, 
