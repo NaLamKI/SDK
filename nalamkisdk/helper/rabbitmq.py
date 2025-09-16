@@ -1,5 +1,6 @@
 import pika
 import pika.credentials
+import ssl
 
 class RabbitMQHelper:
 
@@ -19,10 +20,14 @@ class RabbitMQHelper:
 
         credentials = pika.PlainCredentials(username, password)
 
+        context = ssl.create_default_context()
+        ssl_options = pika.SSLOptions(context, server_hostname=endpoint)
+        
         self.connection = pika.BlockingConnection(pika.ConnectionParameters(host=endpoint, 
                                                                             port=port, 
                                                                             credentials=credentials,
-                                                                            heartbeat=1200
+                                                                            heartbeat=1200,
+                                                                            ssl_options=ssl_options
                                                                ))
         self.channel = self.connection.channel()
         # Declare the queue (if it doesn't already exist)
