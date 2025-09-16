@@ -19,6 +19,7 @@ class NaLamKIService:
         self.s3 = None
         self.action_path = prod_action_path
         self.rmq = None
+        self.save_blueprint()
 
     def init_model(self):
         '''
@@ -68,8 +69,6 @@ class NaLamKIService:
                 f.write(data)
         else:
             print("ERROR: Data is not a valid type (dict or str)")
-        if "dashboard_blueprint.json" not in os.listdir(path):
-            self.save_blueprint()
 
     def save_data(self, files, mode="w"):
         '''
@@ -79,8 +78,6 @@ class NaLamKIService:
         for file in files:
             with open(os.path.join(path, os.path.basename(file.name)), mode) as f:
                 f.write(file.read())
-        if "dashboard_blueprint.json" not in os.listdir(path):
-            self.save_blueprint()
 
     def process_data(self):
         pass
