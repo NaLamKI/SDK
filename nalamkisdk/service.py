@@ -143,6 +143,7 @@ class NaLamKIService:
             os.getenv("MQTT_USERNAME"),
             os.getenv("MQTT_Password"),
             os.getenv("MQTT_QUEUE"),
+            ca_cert_path=os.getenv("MQTT_CA_CERT_PATH"),
         )
         while True:
             # try:

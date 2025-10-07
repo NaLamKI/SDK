@@ -2,15 +2,22 @@ import pika
 import pika.credentials
 import ssl
 
+
 class RabbitMQHelper:
-
-
-    def __init__(self, endpoint: str, port: int, username: str, password: str, queue: str) -> None:
+    def __init__(
+        self,
+        endpoint: str,
+        port: int,
+        username: str,
+        password: str,
+        queue: str,
+        ca_cert_path: str,
+    ) -> None:
         """
         Connection setup for MQTT broker.
 
         :param endpoint: endpoint to MQTT broker
-        :param port: port of the endpoint 
+        :param port: port of the endpoint
         :param username: username for MQTT broker
         :param password: password for MQTT broker
         :param queue: queue for MQTT broker
@@ -20,31 +27,33 @@ class RabbitMQHelper:
 
         credentials = pika.PlainCredentials(username, password)
 
-        context = ssl.create_default_context()
+        context = (
+            ssl.create_default_context(cafile=ca_cert_path)
+            if ca_cert_path
+            else ssl.create_default_context()
+        )
         ssl_options = pika.SSLOptions(context, server_hostname=endpoint)
-        
-        self.connection = pika.BlockingConnection(pika.ConnectionParameters(host=endpoint, 
-                                                                            port=port, 
-                                                                            credentials=credentials,
-                                                                            heartbeat=1200,
-                                                                            ssl_options=ssl_options
-                                                               ))
+
+        self.connection = pika.BlockingConnection(
+            pika.ConnectionParameters(
+                host=endpoint,
+                port=port,
+                credentials=credentials,
+                heartbeat=1200,
+                ssl_options=ssl_options,
+            )
+        )
         self.channel = self.connection.channel()
         # Declare the queue (if it doesn't already exist)
         self.channel.queue_declare(queue=queue, durable=True)
         print("MQTT Client Ready initialized")
-
 
     def write_message(self, message):
         """
         Sends/writes a message on Queue.
         :param message: message to be sent
         """
-        self.channel.basic_publish(
-            exchange='',
-            routing_key=self.queue,
-            body=message
-        )
+        self.channel.basic_publish(exchange="", routing_key=self.queue, body=message)
 
     # def get_message(self, topic):
     #     """
@@ -71,8 +80,8 @@ class RabbitMQHelper:
         # Set up subscription on the queue
         self.channel.basic_consume(
             queue=self.queue,
-            on_message_callback = method if method is not None else self.on_message,
-            auto_ack=False
+            on_message_callback=method if method is not None else self.on_message,
+            auto_ack=False,
         )
 
         print(f"Waiting for messages in {self.queue}.")
